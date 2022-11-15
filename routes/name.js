@@ -31,7 +31,6 @@ router.post("/", async function (req, res, next) {
       error: e.message,
     });
   }
-  // res.send('respond with a resource');
 });
 
 module.exports = router;

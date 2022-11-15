@@ -1,11 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const Name = require("../modules/addstu");
+const Namestudent = require("../modules/addstu");
 
-/* GET users listing. */
 router.get("/", async function (req, res, next) {
   try {
-    const names = await Name.find();
+    const names = await Namestudent.find();
     res.json({
       sucess: "true",
       content: names,
@@ -20,7 +19,7 @@ router.get("/", async function (req, res, next) {
 
 router.post("/", async function (req, res, next) {
   try {
-    const names = new Name(req.body);
+    const names = new Namestudent(req.body);
     await names.save();
     res.json({
       success: true,
@@ -34,21 +33,21 @@ router.post("/", async function (req, res, next) {
   }
 });
 
-router.route('/:id').get((req, res) => {
- const name = Name.findById(req.params.id)
-    .then(name => res.json(name))
-    .catch(err => res.status(400).json('Error: ' + err));
+router.route("/:id").get((req, res) => {
+  Namestudent.findById(req.params.id)
+    .then((name) => res.json(name))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/:id').delete((req, res) => {
-  Name.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Student data deleted.'))
-    .catch(err => res.status(400).json('Error: ' + err));
+router.route("/:id").delete((req, res) => {
+  Namestudent.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Student data deleted."))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.put("/", async function (req, res) {
   try {
-    const edit = await Name.findByIdAndUpdate(req.params.id);
+    const edit = await Namestudent.findByIdAndUpdate(req.params.id);
     console.log(edit);
     res.json({
       success: true,
@@ -62,9 +61,8 @@ router.put("/", async function (req, res) {
   }
 });
 
-
 router.route("/update/:id").post((req, res) => {
-  Name.findById(req.params.id)
+  Namestudent.findById(req.params.id)
     .then((data) => {
       data.name = req.body.name;
       data.email = req.body.email;

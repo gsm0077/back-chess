@@ -29,6 +29,6 @@ const addRouter = require("./routes/addstu");
 app.use("/addname", nameRouter);
 app.use("/add", addRouter);
 
-app.get("/", (req, res) => {
+app.get("/favicon.ico", (req, res) => {
   res.send("API is running..");
 });
